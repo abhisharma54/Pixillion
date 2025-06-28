@@ -3,7 +3,7 @@ import { Header } from "../index";
 
 function Layout() {
   return (
-    <div className="w-full h-full overflow-hidden">
+    <div className="w-full h-full">
       <Header />
       <Outlet />
     </div>
