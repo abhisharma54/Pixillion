@@ -60,7 +60,7 @@ function Hero() {
 
   useEffect(() => {
     if (hasMore) {
-      // handleFetch();
+      handleFetch();
     }
   }, [page]);
 
