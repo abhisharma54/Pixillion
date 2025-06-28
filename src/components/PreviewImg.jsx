@@ -5,7 +5,7 @@ import { ActionButtons } from "../index";
 
 function PreviewImg({ photo, photos }) {
   return (
-    <div className="fixed inset-0 flex flex-col justify-center items-center backdrop-blur-sm bg-black/90 z-50 py-10">
+    <div className="fixed inset-0 flex flex-col justify-center items-center backdrop-blur-sm bg-black/90 z-50 py-10 overflow-hidden">
       <div className="w-[90vw] max-h-[80vh] h-auto flex justify-center lg:w-[900px] shadow-xl">
         <div className="relative">
           <div className="absolute -top-12 right-0 flex gap-2">
