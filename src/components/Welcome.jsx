@@ -7,9 +7,14 @@ function Welcome() {
   const dispatch = useDispatch();
 
   return (
-    <div className="w-full h-full">
-      <div className="w-full h-[70vh] bg-[var(--bg-welcome)] flex justify-center items-center px-4">
-        <div className="flex flex-col items-center">
+    <div className="w-full h-full overflow-hidden">
+      <div className="relative w-full h-[70vh] bg-[var(--bg-welcome)] flex justify-center items-center px-4">
+        <div className="absolute top-0 right-0 w-[50vw] h-full bg-[var(--bg-primary)] overflow-hidden">
+          <div className="absolute -top-10 -right-14 w-[120px] h-[120px] rounded-full bg-[var(--bg-secondary)]"></div>
+          <div className="absolute top-54 left-36 w-[60px] h-[60px] rounded-full bg-[var(--bg-dark)]/20 sm:w-[80px] sm:h-[80px] sm:top-48 sm:left-50"></div>
+          <div className="absolute top-100 left-30 w-[100px] h-[100px] rounded-xl rotate-45 bg-[var(--bg-dark)]/8"></div>
+        </div>
+        <div className="flex flex-col items-center z-20">
           <Logo className="text-7xl sm:text-8xl" />
           <p className="text-xs sm:text-base">
             A modern space to explore diverse visuals in every scroll.
