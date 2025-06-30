@@ -22,7 +22,10 @@ function Gallery({ data, loading, setPage, setLoading }) {
   };
 
   useEffect(() => {
-    if (!data || data.length === 0) return;
+    if (!data || data.length === 0) {
+      setPhotosChunks([]);
+      return;
+    }
 
     if (currPageRef.current === 0) {
       setPhotosChunks([]);
@@ -39,7 +42,7 @@ function Gallery({ data, loading, setPage, setLoading }) {
       setPage((prev) => prev + 1);
     }
 
-    setLoading(false);
+    setTimeout(() => setLoading(false), 2000);
   }, [data, currPageRef.current]);
 
   useEffect(() => {
@@ -50,7 +53,7 @@ function Gallery({ data, loading, setPage, setLoading }) {
 
   return (
     <div className="w-full h-full flex justify-center bg-white">
-      <Container className="relative flex flex-col items-center">
+      <div className="relative flex flex-col items-center">
         {previewImg && <PreviewImg photo={previewImg} photos={photosChunks} />}
         <div className="columns-2 md:columns-3 max-[375px]:columns-1 p-4">
           {photosChunks.map((chunk, index) => (
@@ -67,7 +70,7 @@ function Gallery({ data, loading, setPage, setLoading }) {
           ))}
         </div>
         {loading && <Loader />}
-      </Container>
+      </div>
     </div>
   );
 }

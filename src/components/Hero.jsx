@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Credit, Error, Gallery } from "../index";
 import { ImageIcon, ScrollUpArrowIcon, SearchIcon } from "../assets/assets";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 let per_page = 80;
@@ -9,7 +8,7 @@ function Hero() {
   const [input, setInput] = useState("");
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
-  const [error, setError] = useState("Failed to load images");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
 
@@ -40,8 +39,6 @@ function Hero() {
       } else {
         setError("Failed to load images");
       }
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -65,9 +62,9 @@ function Hero() {
   }, [page]);
 
   return (
-    <div className="w-full h-full">
-      <div className="h-[300px] flex justify-center bg-[#eee]">
-        <Container className="relative flex justify-center items-center">
+    <div className="w-full h-full flex justify-center">
+      <Container>
+        <div className="relative h-[300px] flex justify-center items-center bg-[#eee]">
           <div className="w-[80vw] flex bg-white rounded-full py-2 px-5 shadow-2xl sm:w-[500px] md:w-[600px]">
             <img
               className="w-[20px]"
@@ -95,33 +92,33 @@ function Hero() {
           <div className="absolute flex justify-center items-center mt-24">
             <Credit />
           </div>
-        </Container>
-      </div>
+        </div>
 
-      {error ? (
-        <Error error={error} />
-      ) : (
-        <Gallery
-          data={data}
-          loading={loading}
-          setLoading={setLoading}
-          page={page}
-          setPage={setPage}
-          perPage={per_page}
-          handleFetch={handleFetch}
-        />
-      )}
+        {error ? (
+          <Error error={error} />
+        ) : (
+          <Gallery
+            data={data}
+            loading={loading}
+            setLoading={setLoading}
+            page={page}
+            setPage={setPage}
+            perPage={per_page}
+            handleFetch={handleFetch}
+          />
+        )}
 
-      <button
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="fixed bottom-6 right-6 w-[50px] h-[50px] p-3.5 flex justify-center items-center bg-white rounded-full shadow-xl cursor-pointer z-40"
-      >
-        <img
-          src={ScrollUpArrowIcon}
-          alt="Scroll back to top of the page"
-          loading="lazy"
-        />
-      </button>
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="fixed bottom-6 right-6 w-[50px] h-[50px] p-3.5 flex justify-center items-center bg-white rounded-full shadow-xl cursor-pointer z-40"
+        >
+          <img
+            src={ScrollUpArrowIcon}
+            alt="Scroll back to top of the page"
+            loading="lazy"
+          />
+        </button>
+      </Container>
     </div>
   );
 }

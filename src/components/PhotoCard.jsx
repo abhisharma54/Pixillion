@@ -29,7 +29,12 @@ function PhotoCard({ photo, index, photos }) {
         className={`bg-[${photo.avg_color}]`}
         onClick={() => handlePreview(photo.id)}
       >
-        <img src={photo.src.original} alt={photo.alt} loading="lazy" />
+        <img
+          className="w-full h-full bg-[#eee]"
+          src={photo.src.original}
+          alt={photo.alt}
+          loading="lazy"
+        />
       </div>
     </div>
   );
