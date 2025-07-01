@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { ActionButtons } from "../index";
 import { usePhotoHandler } from "../hook/usePhotoHandler";
 
@@ -40,4 +40,4 @@ function PhotoCard({ photo, index, photos }) {
   );
 }
 
-export default PhotoCard;
+export default React.memo(PhotoCard);
