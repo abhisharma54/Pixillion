@@ -11,36 +11,62 @@ function Welcome() {
   const dispatch = useDispatch();
 
   useGSAP(() => {
-    gsap.fromTo(
-      ".logo-text",
-      {
-        opacity: 0,
-        y: 0,
-        color: "green",
-      },
-      {
-        opacity: 1,
-        y: -100,
-        color: "var(--text-secondary)",
-        scale: 1.2,
-        stagger: {
-          grid: [1, 9],
-          from: "edges",
-          amount: 0.8,
+    let timeline = gsap.timeline();
+    timeline
+      .fromTo(
+        ".logo-text",
+        {
+          opacity: 0,
+          y: 0,
+          color: "green",
         },
-      }
-    );
-    gsap.from(".pattern", {
-      opacity: 0,
-      y: 100,
-      stagger: 0.4,
-    });
+        {
+          opacity: 1,
+          y: -100,
+          color: "var(--text-secondary)",
+          scale: 1.2,
+          stagger: {
+            grid: [1, 9],
+            from: "edges",
+            amount: 0.8,
+          },
+        },
+        "main"
+      )
 
-    gsap.from(".description", {
-      opacity: 0,
-      x: -200,
-      delay: 1,
-    });
+      .from(
+        ".pattern",
+        {
+          opacity: 0,
+          y: 100,
+          stagger: 0.4,
+        },
+        "-=0.4"
+      )
+
+      .from(
+        ".description",
+        {
+          opacity: 0,
+          x: -200,
+          delay: 1,
+        },
+        "main",
+        "-=0.2"
+      )
+
+      .from(
+        ".explore-btn",
+        {
+          opacity: 0,
+          scale: 1.5,
+          y: 10,
+          delay: 1,
+          ease: "bounce.out",
+        },
+        "main",
+        "-=1.2"
+      );
   }, []);
 
   return (
