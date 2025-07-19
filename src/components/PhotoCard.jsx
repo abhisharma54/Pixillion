@@ -10,7 +10,7 @@ function PhotoCard({ photo, index, photos }) {
     <div
       onMouseEnter={() => setOnHoverIndex(index)}
       onMouseLeave={() => setOnHoverIndex(null)}
-      className="relative mb-4 cursor-pointer overflow-hidden"
+      className="relative mb-4 cursor-pointer rounded-[var(--image-radius)] overflow-hidden"
     >
       <div
         className={`absolute top-3 right-3 flex gap-1 transition-translate duration-150 ease-in ${

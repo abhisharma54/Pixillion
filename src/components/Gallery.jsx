@@ -42,7 +42,7 @@ function Gallery({ data, loading, setPage, setLoading }) {
       setPage((prev) => prev + 1);
     }
 
-    setTimeout(() => setLoading(false), 2000);
+    setTimeout(() => setLoading(false), 1000);
   }, [data, currPageRef.current]);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ function Gallery({ data, loading, setPage, setLoading }) {
     <div className="w-full h-full flex justify-center bg-white">
       <div className="relative flex flex-col items-center">
         {previewImg && <PreviewImg photo={previewImg} photos={photosChunks} />}
-        <div className="columns-2 md:columns-3 max-[375px]:columns-1 p-4">
+        <div className="columns-2 md:columns-3 max-[375px]:columns-1 p-4 xl:px-0">
           {photosChunks.map((chunk, index) => (
             <React.Fragment key={index}>
               {chunk.map((item, i) => (

@@ -10,6 +10,8 @@
   --text-secondary: #475569;
   --text-dark: #202020;
   --bg-welcome: #eee;
+  --bg-hero: linear-gradient(to top, #fff, #eee 80%, #fff);
+  --image-radius: 1rem;
 }
 
 *,

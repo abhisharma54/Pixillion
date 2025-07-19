@@ -64,7 +64,7 @@ function Hero() {
   return (
     <div className="w-full h-full flex justify-center">
       <Container>
-        <div className="relative h-[300px] flex justify-center items-center bg-[#eee]">
+        <div className="relative h-[300px] flex justify-center items-center bg-[image:var(--bg-hero-input)]">
           <div className="w-[80vw] flex bg-white rounded-full py-2 px-5 shadow-2xl sm:w-[500px] md:w-[600px]">
             <img
               className="w-[20px]"
