@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   DarkLikeIcon,
   FavoriteStrokeIcon,
@@ -11,6 +12,14 @@ import { Link } from "react-router-dom";
 function Favorite() {
   const photos = useSelector((state) => state.photos);
   const previewImg = useSelector((state) => state.preview);
+
+  useEffect(() => {
+    if (previewImg) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [previewImg]);
 
   return (
     <div className="w-full h-full flex justify-center">

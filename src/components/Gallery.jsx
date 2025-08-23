@@ -51,6 +51,14 @@ function Gallery({ data, loading, setPage, setLoading }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (previewImg) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [previewImg]);
+
   return (
     <div className="w-full h-full flex justify-center bg-white">
       <div className="relative flex flex-col items-center">
