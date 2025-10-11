@@ -14,9 +14,12 @@ export const usePhotoHandler = (photos) => {
       );
       let updateFavPhoto = photos.filter((prev) => prev.id !== itemId);
       dispatch(setPhotos(updateFavPhoto));
+      dispatch(setPreviewImg(null));
     } else {
       let photo = photos.flat().find((prev) => prev.id === itemId);
-      dispatch(setPhotos([...favPhotos, { ...photo, liked: true }]));
+      if (photo) {
+        dispatch(setPhotos([...favPhotos, { ...photo, liked: true }]));
+      }
     }
   };
 

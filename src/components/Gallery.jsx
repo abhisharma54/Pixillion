@@ -15,7 +15,7 @@ function Gallery({ data, loading, setPage, setLoading }) {
     let scrollTop = window.document.scrollingElement.scrollTop;
     let scrollHeight = window.document.scrollingElement.scrollHeight;
 
-    if (innerHeight + scrollTop + 1 > scrollHeight) {
+    if (innerHeight + scrollTop + 50 > scrollHeight) {
       setLoading(true);
       currPageRef.current += 1;
     }
@@ -54,6 +54,8 @@ function Gallery({ data, loading, setPage, setLoading }) {
   useEffect(() => {
     if (previewImg) {
       document.body.style.overflow = "hidden";
+
+      return () => (document.body.style.overflow = "auto");
     } else {
       document.body.style.overflow = "auto";
     }
