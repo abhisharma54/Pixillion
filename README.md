@@ -30,23 +30,27 @@ A modern and responsive image gallery web application built with React. Pixillio
 
 ## 📂 Project Structure
 
-`Pixillion/ 
-│ 
-├── src/ 
-│ ├── assets/ 
-│ ├── components/ 
-│ ├── pages/ 
-│ ├── store/ 
-│ ├── style/ 
-│ ├── App.jsx 
-│ └── main.jsx 
-│ 
-├── public/ 
-├── .env.example 
-├── index.html 
-├── package.json 
-├── vite.config.js 
-└── README.md`
+```
+Pixillion/
+│
+├── src/
+│ ├── assets/
+│ ├── components/
+│ ├── pages/
+│ ├── store/
+│ ├── style/
+│ ├── App.jsx
+│ └── main.jsx
+│
+├── public/
+├── .env.example
+├── index.html
+├── package.json
+├── vite.config.js
+└── README.md
+```
+
+---
 
 ## 🚀 Getting Started
 
