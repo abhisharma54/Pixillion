@@ -3,10 +3,7 @@ import { Link } from "react-router-dom";
 
 function Logo({ className }) {
   return (
-    <Link
-      to="/"
-      className={`font_bebas_neue text-[var(--text-dark)] ${className}`}
-    >
+    <Link to="/" className={`font-semibold text-ink ${className}`}>
       PIXILLION
     </Link>
   );

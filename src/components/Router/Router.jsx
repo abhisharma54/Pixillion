@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home, About, Favorite, Layout, NotFoundPage } from "../index";
+import { Home, About, Favorite, Layout, NotFound } from "../../index";
+
 function Router() {
   return (
     <BrowserRouter>
@@ -9,7 +10,7 @@ function Router() {
           <Route path="about" element={<About />} />
           <Route path="favorite" element={<Favorite />} />
         </Route>
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,18 +1,6 @@
-@import url("@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton+SC&family=Audiowide&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Lilita+One&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import "./styles/theme.css";
 @import "tailwindcss";
-
-:root {
-  --bg-primary: #fff;
-  --bg-dark: #202020;
-  --bg-secondary: #475569;
-  --bg-danger: #ff0000;
-  --text-primary: #fff;
-  --text-secondary: #475569;
-  --text-dark: #202020;
-  --bg-welcome: #eee;
-  --bg-hero-input: linear-gradient(to top, #fff, #ddd 80%, #fff);
-  --image-radius: 1rem;
-}
 
 *,
 html,
@@ -27,8 +15,10 @@ body {
 body {
   width: 100vw;
   height: 100vh;
-  background-color: var(--bgColor);
-  color: var(--textColor);
+  background-color: var(--color-background);
+  color: var(--color-ink);
+
+  font-family: "Montserrat", sans-serif;
 }
 
 #root {
@@ -40,60 +30,21 @@ button {
   cursor: pointer;
 }
 
-.font_bebas_neue {
-  font-family: "Bebas Neue", sans-serif;
-  font-weight: 600;
-  font-style: normal;
+/* Masonry Layout */
+.my-masonry-grid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: -30px;
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 30px;
+  background-clip: padding-box;
 }
 
-.font_caveat {
-  font-family: "Caveat", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.font_comfortaa {
-  font-family: "Comfortaa", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.explore-btn {
-  position: relative;
-  min-width: min-content;
-  width: 140px;
-  padding: 8px 20px;
-  border-radius: 100px;
-  background-color: var(--bg-secondary);
-  color: white;
-  overflow: hidden;
-  text-align: center;
-  z-index: 1;
-}
-
-.explore-btn::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  border-radius: 100px;
-  background-color: var(--bg-dark);
-  transition: width 0.3s ease;
-  z-index: -1;
-}
-
-.explore-btn:hover::after {
-  width: 100%;
-}
-
-.highlight_primary {
-  font-weight: 500;
-  color: var(--text-dark);
-}
-
-.highlight_secondary {
-  font-weight: 500;
-  color: var(--text-secondary);
+/* Style your items */
+.my-masonry-grid_column > div {
+  background: grey;
+  margin-bottom: 30px;
 }

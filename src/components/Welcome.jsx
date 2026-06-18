@@ -1,11 +1,13 @@
-import { RightArrowIcon } from "../assets/assets";
-import { Footer, Logo } from "../index";
+import { Footer, Logo, Button } from "../index";
 import { onExplore } from "../store/favPhotoSlice";
 import { useDispatch } from "react-redux";
 import { useGSAP } from "@gsap/react";
+import { RiArrowRightSLine } from "react-icons/ri";
 import gsap from "gsap";
 
 gsap.registerPlugin(useGSAP);
+
+const HEADING = "PIXILLION";
 
 function Welcome() {
   const dispatch = useDispatch();
@@ -18,20 +20,20 @@ function Welcome() {
         {
           opacity: 0,
           y: 0,
-          color: "green",
+          color: "var(--color-muted)",
         },
         {
           opacity: 1,
           y: -100,
-          color: "var(--text-secondary)",
           scale: 1.2,
+          color: "var(--color-ink)",
           stagger: {
             grid: [1, 9],
             from: "edges",
             amount: 0.8,
           },
         },
-        "main"
+        "main",
       )
 
       .from(
@@ -41,7 +43,7 @@ function Welcome() {
           y: 100,
           stagger: 0.4,
         },
-        "-=0.4"
+        "-=0.4",
       )
 
       .from(
@@ -52,7 +54,7 @@ function Welcome() {
           delay: 1,
         },
         "main",
-        "-=0.2"
+        "-=0.2",
       )
 
       .from(
@@ -65,45 +67,39 @@ function Welcome() {
           ease: "bounce.out",
         },
         "main",
-        "-=1.2"
+        "-=1.2",
       );
   }, []);
 
   return (
     <div className="w-full h-full overflow-hidden">
-      <div className="relative w-full h-[70vh] bg-[var(--bg-welcome)] flex justify-center items-center px-4">
-        <div className="absolute top-0 right-0 w-[50vw] h-full bg-[var(--bg-primary)] overflow-hidden">
-          <div className="pattern absolute -top-10 -right-14 w-[120px] h-[120px] rounded-full bg-[var(--bg-secondary)]"></div>
-          <div className="pattern absolute top-54 left-36 w-[60px] h-[60px] rounded-full bg-[var(--bg-dark)]/20 sm:w-[80px] sm:h-[80px] sm:top-48 sm:left-50"></div>
-          <div className="pattern absolute top-100 left-30 w-[100px] h-[100px] rounded-xl rotate-45 bg-[var(--bg-dark)]/8"></div>
+      <div className="relative w-full h-[70vh] bg-surface flex justify-center items-center px-4">
+        <div className="absolute top-0 right-0 w-[50vw] h-full bg-background overflow-hidden">
+          <div className="pattern absolute -top-10 -right-14 w-30 h-30 rounded-full bg-ink/80 blur-xs"></div>
+          <div className="pattern absolute top-54 left-36 w-15 h-15 rounded-full bg-ink/20 blur-xs sm:w-20 sm:h-20 sm:top-48 sm:left-50"></div>
+          <div className="pattern absolute top-100 left-30 w-25 h-25 rounded-xl rotate-45 bg-ink/40 blur-sm"></div>
         </div>
         <div className="flex flex-col items-center z-20">
-          <div className="font_bebas_neue text-[var(--text-dark)] text-7xl sm:text-8xl">
-            <span className="logo-text">P</span>
-            <span className="logo-text">I</span>
-            <span className="logo-text">X</span>
-            <span className="logo-text">I</span>
-            <span className="logo-text">L</span>
-            <span className="logo-text">L</span>
-            <span className="logo-text">I</span>
-            <span className="logo-text">O</span>
-            <span className="logo-text">N</span>
+          <div className=" font-semibold text-5xl sm:text-8xl">
+            {HEADING.split("").map((letter, i) => (
+              <span key={i} className="logo-text text-ink/90">
+                {letter}
+              </span>
+            ))}
           </div>
-          <p className="description text-xs sm:text-base">
+          <p className="description text-ink/50 text-center text-base sm:text-xl">
             A modern space to explore diverse visuals in every scroll.
           </p>
-          <button
+          <Button
+            to={"#"}
             onClick={() => dispatch(onExplore())}
-            className="explore-btn flex justify-center items-center mt-10 text-lg sm:text-xl"
+            className="explore-btn"
           >
             <span>Explore</span>
-            <img
-              className="w-[30px]"
-              src={RightArrowIcon}
-              alt="explore photos"
-              loading="lazy"
-            />
-          </button>
+            <span>
+              <RiArrowRightSLine className="text-2xl" />
+            </span>
+          </Button>
         </div>
       </div>
       <div className="w-full h-[30vh]">

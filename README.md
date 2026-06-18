@@ -1,12 +1,111 @@
-# React + Vite
+# 📸 Pixillion
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and responsive image gallery web application built with React. Pixillion provides a clean and visually appealing interface for browsing high-quality images with a smooth user experience.
 
-Currently, two official plugins are available:
+🌐 Live Demo: [Pixillion](https://pixillion.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- Modern and responsive UI
+- Beautiful image gallery layout
+- Fast loading and optimized performance
+- Mobile-friendly design
+- Smooth user experience
+- Built with React and Vite
+- Deployed on Vercel
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+### Frontend
+
+- React.js
+- Vite
+- JavaScript (ES6+)
+- HTML5
+- CSS3
+
+### Deployment
+
+- Vercel
+
+## 📂 Project Structure
+
+`Pixillion/ 
+│ 
+├── src/ 
+│ ├── assets/ 
+│ ├── components/ 
+│ ├── pages/ 
+│ ├── store/ 
+│ ├── style/ 
+│ ├── App.jsx 
+│ └── main.jsx 
+│ 
+├── public/ 
+├── .env.example 
+├── index.html 
+├── package.json 
+├── vite.config.js 
+└── README.md`
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Make sure you have installed:
+
+- Node.js (v18 or later)
+- npm
+
+### Local Development
+
+Clone and install:
+
+```
+git clone https://github.com/abhisharma54/Pixillion.git
+cd Pixillion
+npm install
+npm run dev
+```
+
+## Build for Production
+
+Create an optimized production build:
+
+```
+npm run build
+```
+
+Preview the production build locally:
+
+```
+npm run preview
+```
+
+## 🌍 Deployment
+
+This project is deployed using Vercel.
+
+To deploy your own version:
+
+```
+npm install -g vercel
+vercel
+```
+
+Or connect the GitHub repository directly with Vercel for automatic deployments.
+
+## 📱 Responsive Design
+
+Pixillion is designed to work seamlessly across:
+
+- Desktop
+- Laptop
+- Tablet
+- Mobile Devices
+
+## 👨‍💻 Author
+
+### Abhishek Sharma
+
+GitHub: https://github.com/abhisharma54

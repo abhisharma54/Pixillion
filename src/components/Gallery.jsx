@@ -1,88 +1,85 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Container, Loader, PhotoCard, PreviewImg } from "../index";
 import { useSelector } from "react-redux";
+import { useInView } from "react-intersection-observer";
+import Masonry from "react-masonry-css";
 
-let showChunk = 12;
-function Gallery({ data, loading, setPage, setLoading }) {
-  const [photosChunks, setPhotosChunks] = useState([]);
-  const [limit, setLimit] = useState(Math.ceil(data.length / showChunk));
-  const currPageRef = useRef(0);
+const SHOW_CHUNK = 10;
 
+function Gallery({ data, loading, setPage }) {
+  const [chunks, setChunks] = useState([]);
+  const [chunkPage, setChunkPage] = useState(0);
+  const [chunkLoading, setChunkLoading] = useState(true);
   const previewImg = useSelector((state) => state.preview);
 
-  const handleScroll = () => {
-    let innerHeight = window.innerHeight;
-    let scrollTop = window.document.scrollingElement.scrollTop;
-    let scrollHeight = window.document.scrollingElement.scrollHeight;
+  const { ref, inView } = useInView({
+    threshold: 0,
+    rootMargin: "300px",
+  });
 
-    if (innerHeight + scrollTop + 50 > scrollHeight) {
-      setLoading(true);
-      currPageRef.current += 1;
-    }
-  };
-
-  useEffect(() => {
+  useMemo(() => {
+    // fresh search
     if (!data || data.length === 0) {
-      setPhotosChunks([]);
+      setChunks([]);
+      setChunkPage(0);
       return;
     }
 
-    if (currPageRef.current === 0) {
-      setPhotosChunks([]);
-    }
+    const start = chunkPage * SHOW_CHUNK;
+    const end = start + SHOW_CHUNK;
+    const visiblePhotos = data.slice(start, end);
 
-    const start = currPageRef.current * showChunk;
-    const end = start + showChunk;
-    const newData = data.slice(start, end);
-
-    if (newData.length > 0) {
-      setPhotosChunks((prev) => [...prev, newData]);
-    } else if (photosChunks.length >= limit) {
-      setLimit((prev) => prev + Math.ceil(data.length / showChunk));
+    if (visiblePhotos.length > 0) {
+      setChunks((prev) => [...prev, ...visiblePhotos]);
+      setChunkLoading(false);
+    } else {
       setPage((prev) => prev + 1);
     }
-
-    setTimeout(() => setLoading(false), 1000);
-  }, [data, currPageRef.current]);
+  }, [data, chunkPage, setPage]);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (previewImg) {
-      document.body.style.overflow = "hidden";
-
-      return () => (document.body.style.overflow = "auto");
-    } else {
-      document.body.style.overflow = "auto";
+    if (inView && !chunkLoading) {
+      setChunkLoading(true);
+      setChunkPage((prev) => prev + 1);
     }
+  }, [inView, chunkLoading]);
+
+  useEffect(() => {
+    document.body.style.overflow = previewImg ? "hidden" : "auto";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [previewImg]);
 
+  // Masonry Layout breakpoints
+  const breakpointColumnsObj = {
+    default: 3,
+    900: 2,
+    650: 1,
+  };
+
   return (
-    <div className="w-full h-full flex justify-center bg-white">
+    <div className="w-full h-full flex flex-col items-center bg-default">
       <div className="relative flex flex-col items-center">
-        {previewImg && <PreviewImg photo={previewImg} photos={photosChunks} />}
-        <div className="columns-2 md:columns-3 max-[375px]:columns-1 p-4 xl:px-0">
-          {photosChunks.map((chunk, index) => (
-            <React.Fragment key={index}>
-              {chunk.map((item, i) => (
-                <PhotoCard
-                  key={item.id}
-                  index={i}
-                  photo={item}
-                  photos={photosChunks}
-                />
-              ))}
-            </React.Fragment>
+        {previewImg && <PreviewImg photo={previewImg} photos={chunks} />}
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="my-masonry-grid p-4"
+          columnClassName="my-masonry-grid_column"
+        >
+          {chunks.map((chunk, index) => (
+            <PhotoCard
+              key={chunk.id}
+              index={index}
+              photo={chunk}
+              photos={chunks}
+            />
           ))}
-        </div>
-        {loading && <Loader />}
+        </Masonry>
+        {(chunkLoading || loading) && <Loader />}
+        <div ref={ref}></div>
       </div>
     </div>
   );
 }
-
 export default Gallery;

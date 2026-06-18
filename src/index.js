@@ -1,25 +1,24 @@
-import Logo from "./components/Logo";
+import Logo from "./components/atoms/Logo";
 import Home from "./page/Home";
 import About from "./page/About";
 import Favorite from "./page/Favorite";
 import Hero from "./components/Hero";
-import Header from "./components/Header";
+import Navigation from "./components/Header/Navigation";
 import Welcome from "./components/Welcome";
 import Gallery from "./components/Gallery";
-import Router from "./components/Router";
-import Footer from "./components/Footer";
+import Router from "./components/Router/Router";
+import Footer from "./components/Footer/Footer";
 import Layout from "./components/Layout";
-import Menu from "./components/Menu";
-import Button from "./components/Button";
-import SocialLink from "./components/SocialLink";
+import Button from "./components/atoms/Button";
+import SocialLink from "./components/atoms/SocialLink";
 import Container from "./components/Container";
-import Loader from "./components/Loader";
+import Loader from "./components/atoms/Loader";
 import PreviewImg from "./components/PreviewImg";
 import PhotoCard from "./components/PhotoCard";
-import ActionButtons from "./components/ActionButtons";
-import Credit from "./utils/Credit";
+import ActionButtons from "./components/atoms/ActionButtons";
+import Credit from "./components/atoms/Credit";
 import Error from "./components/Error";
-import NotFoundPage from "./components/NotFoundPage";
+import NotFound from "./page/NotFound";
 
 export {
   Logo,
@@ -27,13 +26,12 @@ export {
   About,
   Favorite,
   Hero,
-  Header,
+  Navigation,
   Welcome,
   Gallery,
   Router,
   Footer,
   Layout,
-  Menu,
   Button,
   SocialLink,
   Container,
@@ -43,5 +41,5 @@ export {
   ActionButtons,
   Credit,
   Error,
-  NotFoundPage,
+  NotFound,
 };

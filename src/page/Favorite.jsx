@@ -1,24 +1,22 @@
 import { useEffect } from "react";
-import {
-  DarkLikeIcon,
-  FavoriteStrokeIcon,
-  LikeIcon,
-  RightArrowIcon,
-} from "../assets/assets";
-import { Container, PhotoCard, PreviewImg } from "../index";
+import { Button, Container, PhotoCard, PreviewImg } from "../index";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { CiStar } from "react-icons/ci";
+import { IoHeartDislikeOutline } from "react-icons/io5";
+import { RiArrowRightSLine } from "react-icons/ri";
+import { FaHeart } from "react-icons/fa";
 
 function Favorite() {
   const photos = useSelector((state) => state.photos);
   const previewImg = useSelector((state) => state.preview);
 
   useEffect(() => {
-    if (previewImg) {
-      document.body.style.overflow = "hidden";
-    } else {
+    document.body.style.overflow = previewImg ? "hidden" : "auto";
+
+    return () => {
       document.body.style.overflow = "auto";
-    }
+    };
   }, [previewImg]);
 
   return (
@@ -26,34 +24,20 @@ function Favorite() {
       <Container className="py-10">
         {previewImg && <PreviewImg photo={previewImg} photos={photos} />}
 
-        <div className="flex justify-between items-center gap-2 px-4">
-          <div>
+        <div className="flex justify-between items-center gap-2 px-4 pb-5">
+          <div className="flex flex-col">
             <div className="flex items-center gap-1">
-              <img
-                className="w-[23px] mb-1 sm:w-[30px]"
-                src={FavoriteStrokeIcon}
-                alt="favorite icon"
-                loading="lazy"
-              />
-              <h1 className="text-2xl font_bebas_neue font-semibold sm:text-3xl">
-                Favorite
-              </h1>
+              <CiStar className="text-3xl sm:text-4xl" />
+              <h1 className="text-2xl font-semibold sm:text-3xl">Favorite</h1>
             </div>
-            <p className="ml-7 -mt-1 text-sm font-semibold text-[var(--text-secondary)] sm:text-lg sm:ml-8.5 sm:-mt-2">
+            <p className="ml-8.5 -mt-1 text-sm font-semibold text-ink/70 sm:text-lg sm:ml-10 sm:-mt-2">
               Here you can find all your liked photos.
             </p>
           </div>
-          <div className="px-3 py-2 flex items-center shrink-0 text-nowrap gap-1 text-lg font-medium text-[var(--text-dark)] bg-[var(--bg-welcome)]/80 rounded-xl sm:text-xl max-[425px]:gap-2">
-            <img
-              className="w-[20px] -mb-1 sm:w-[22px]"
-              src={LikeIcon}
-              alt="like icon"
-              loading="lazy"
-            />
+          <div className="px-3 py-2 flex items-center shrink-0 text-nowrap gap-1 text-lg font-medium text-ink bg-surface shadow-xl rounded-full border-2 border-t-white border-r-white border-l-muted/60 border-b-muted backdrop-blur-sm sm:text-xl max-[425px]:gap-2">
+            <FaHeart className="text-xl text-red-500" />
             <span className="block max-[425px]:hidden">Photos - </span>
-            <span className="text-[var(--text-secondary)]">
-              {photos.length}
-            </span>
+            <span className="text-ink/80">{photos.length}</span>
           </div>
         </div>
         {photos.length ? (
@@ -65,27 +49,14 @@ function Favorite() {
         ) : (
           <div className="w-full h-full flex justify-center items-center">
             <div className="flex flex-col items-center gap-4">
-              <img
-                className="w-[100px] -mb-5"
-                src={DarkLikeIcon}
-                alt="no like"
-                loading="lazy"
-              />
+              <IoHeartDislikeOutline className="text-8xl sm:text-9xl" />
               <p className="text-lg font-normal">
                 You havn't liked any photos yet.
               </p>
-              <Link
-                to="/"
-                className="flex justify-center explore-btn text-lg sm:text-xl"
-              >
+              <Button to="/">
                 <span>Explore</span>
-                <img
-                  className="w-[30px]"
-                  src={RightArrowIcon}
-                  alt="explore photos"
-                  loading="lazy"
-                />
-              </Link>
+                <RiArrowRightSLine className="text-2xl" />
+              </Button>
             </div>
           </div>
         )}

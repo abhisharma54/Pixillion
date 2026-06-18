@@ -1,39 +1,34 @@
-import { NoInternetIcon } from "../assets/assets";
 import { Link } from "react-router-dom";
-import { Button } from "../index";
+import { IoMdRefresh } from "react-icons/io";
+import { MdSignalWifiStatusbarConnectedNoInternet } from "react-icons/md";
+import Button from "./atoms/Button";
+import React from "react";
 
 function Error({ error }) {
   return (
     <div className="w-full h-full max-h-[60vh] flex justify-center items-center py-10">
       {error === "No internet connection" ? (
         <div className="flex flex-col items-center">
-          <img
-            className="w-[100px] sm:w-[120px]"
-            src={NoInternetIcon}
-            alt="no internet"
-            loading="lazy"
-          />
-          <span className="sm:text-lg">{error}</span>
-          <Link
-            to="/"
-            className="explore-btn text-[var(--text-primary)] text-nowrap bg-[var(--bg-secondary)] mt-5 sm:text-lg"
-          >
-            Refresh Page
-          </Link>
+          <MdSignalWifiStatusbarConnectedNoInternet className="text-9xl" />
+          <span className="font-semibold sm:text-lg">
+            {error || "No Internet"}
+          </span>
+          <Button to="/">
+            <span className="text-nowrap">Refresh Page</span>
+            <IoMdRefresh className="text-2xl" />
+          </Button>
         </div>
       ) : (
         <div className="flex flex-col items-center">
           <div className="relative">
-            <h1 className="text-[10rem] font-semibold">4O4</h1>
-            <span className="absolute top-29 left-1/2 -translate-x-1/2 px-7 text-nowrap font-semibold bg-[var(--bg-primary)] text-base">
-              {error}
+            <h1 className="text-[8rem] sm:text-[10rem] font-semibold">503</h1>
+            <span className="absolute top-24 left-1/2 sm:top-29 -translate-x-1/2 px-7 text-nowrap font-semibold bg-default text-sm sm:text-base">
+              {error || "Service temporarily unavailable"}
             </span>
           </div>
-          <Button
-            to="/"
-            className="text-[var(--text-primary)] bg-[var(--bg-secondary)] mt-5 sm:text-lg"
-          >
-            Refresh Page
+          <Button to="/">
+            <span className="text-nowrap">Refresh Page</span>
+            <IoMdRefresh className="text-2xl" />
           </Button>
         </div>
       )}
@@ -41,4 +36,4 @@ function Error({ error }) {
   );
 }
 
-export default Error;
+export default React.memo(Error);

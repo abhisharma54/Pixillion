@@ -1,30 +1,30 @@
 import { useEffect, useState } from "react";
 import { Container, Credit, Error, Gallery } from "../index";
-import { ImageIcon, ScrollUpArrowIcon, SearchIcon } from "../assets/assets";
-import axios from "axios";
+import { BsImageFill } from "react-icons/bs";
+import { IoSearch } from "react-icons/io5";
+import { CiCircleChevUp } from "react-icons/ci";
+import { FaAngleUp } from "react-icons/fa";
+import { fetchPhotos } from "../api/pexels";
 
 let per_page = 80;
 function Hero() {
   const [input, setInput] = useState("");
+  const [query, setQuery] = useState("Mountain"); // term actually being searched
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const [searchId, setSearchId] = useState(0); // bumps on every search, forces refetch
 
-  const handleFetch = async () => {
-    let url = `https://api.pexels.com/v1/search?query=${
-      input || "Mountain"
-    }&per_page=${per_page}&page=${page}`;
+  const handleFetch = async (fetchQuery, fetchPage) => {
     setError("");
     setLoading(true);
+    setInput("");
+
     try {
-      let res = await axios.get(url, {
-        headers: {
-          Authorization: import.meta.env.VITE_ACCESS_KEY,
-        },
-      });
-      let result = res.data;
+      const result = await fetchPhotos(fetchQuery, fetchPage, per_page);
+
       setData((prev) => [...prev, ...result.photos]);
 
       if (
@@ -34,44 +34,39 @@ function Hero() {
         setHasMore(false);
       }
     } catch (err) {
-      if (err.message.includes("NetworkError")) {
+      if (err.code === "ERR_NETWORK" || err.message.includes("Network")) {
         setError("No internet connection");
       } else {
         setError("Failed to load images");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSearch = () => {
     if (!input.trim()) return;
 
+    setQuery(input);
     setData([]);
     setPage(1);
     setHasMore(true);
     setError("");
-
-    setTimeout(() => {
-      handleFetch();
-    }, 0);
+    setSearchId((prev) => prev + 1);
   };
 
   useEffect(() => {
     if (hasMore) {
-      handleFetch();
+      handleFetch(query, page);
     }
-  }, [page]);
+  }, [page, searchId]);
 
   return (
     <div className="w-full h-full flex justify-center">
       <Container>
-        <div className="relative h-[300px] flex justify-center items-center bg-[image:var(--bg-hero-input)]">
-          <div className="w-[80vw] flex bg-white rounded-full py-2 px-5 shadow-2xl sm:w-[500px] md:w-[600px]">
-            <img
-              className="w-[20px]"
-              src={ImageIcon}
-              alt="photo icon"
-              loading="lazy"
-            />
+        <div className="relative h-75 flex justify-center items-center bg-hero">
+          <div className="w-[80vw] flex bg-default rounded-full py-2 px-5 shadow-xl sm:w-125 md:w-150 border-2 border-t-white border-r-white border-l-muted/60 border-b-muted backdrop-blur-sm">
+            <BsImageFill className="text-2xl" />
             <input
               type="text"
               placeholder="Search photos"
@@ -81,12 +76,7 @@ function Hero() {
               onKeyDown={(e) => (e.key === "Enter" ? handleSearch() : null)}
             />
             <button onClick={() => handleSearch()}>
-              <img
-                className="w-[30px] transition duration-150 ease-in hover:scale-110"
-                src={SearchIcon}
-                alt="search for free photos"
-                loading="lazy"
-              />
+              <IoSearch className="text-2xl transition duration-150 ease-standard hover:scale-110" />
             </button>
           </div>
           <div className="absolute flex justify-center items-center mt-24">
@@ -97,26 +87,14 @@ function Hero() {
         {error ? (
           <Error error={error} />
         ) : (
-          <Gallery
-            data={data}
-            loading={loading}
-            setLoading={setLoading}
-            page={page}
-            setPage={setPage}
-            perPage={per_page}
-            handleFetch={handleFetch}
-          />
+          <Gallery data={data} loading={loading} setPage={setPage} />
         )}
 
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-6 right-6 w-[50px] h-[50px] p-3.5 flex justify-center items-center bg-white rounded-full shadow-xl cursor-pointer z-40"
+          className="fixed bottom-6 right-6 xl:right-15 w-12 h-12 flex justify-center items-center bg-default/30 rounded-full shadow-xl cursor-pointer z-40 transition-transform duration-150 ease-standard hover:scale-110 backdrop-blur-sm"
         >
-          <img
-            src={ScrollUpArrowIcon}
-            alt="Scroll back to top of the page"
-            loading="lazy"
-          />
+          <FaAngleUp className="text-4xl" />
         </button>
       </Container>
     </div>
