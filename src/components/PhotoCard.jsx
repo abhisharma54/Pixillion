@@ -29,7 +29,7 @@ function PhotoCard({ photo, index, photos }) {
       </div>
 
       <div
-        onClick={() => handlePreview(photo.id)}
+        onClick={() => handlePreview(photo)}
         style={{
           backgroundColor: photo.avg_color,
         }}
@@ -39,7 +39,8 @@ function PhotoCard({ photo, index, photos }) {
           <img
             src={photo.src.tiny}
             alt={photo.alt}
-            className={`absolute inset-0 w-full h-full object-cover blur-xl transition-opacity duration-500 ease-standard ${
+            loading="lazy"
+            className={`absolute inset-0 object-cover blur-xl transition-opacity duration-500 ease-standard ${
               loaded ? "opacity-0" : "opacity-100"
             }`}
           />

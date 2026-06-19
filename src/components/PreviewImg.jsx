@@ -23,7 +23,8 @@ function PreviewImg({ photo, photos }) {
           <img
             src={photo.src.tiny}
             alt={photo.alt}
-            className={`absolute h-full blur-sm object-cover transition-opacity duration-500 ease-standard ${
+            loading="lazy"
+            className={`absolute h-full blur-xs object-cover transition-opacity duration-500 ease-standard ${
               loaded ? "opacity-0" : "opacity-100"
             }`}
           />

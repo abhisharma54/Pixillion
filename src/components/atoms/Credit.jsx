@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 function Credit({ className }) {
   return (
-    <div className={`flex justify-center items-center ${className}`}>
+    <div className={`flex items-center ${className}`}>
       <span className="text-sm sm:text-base">Images from</span>
       <Link
-        className="cursor-pointer transition duration-100 ease-in hover:scale-105"
+        className="cursor-pointer transition-transform duration-100 ease-standard hover:scale-105"
         to="https://www.pexels.com"
         target="_blank"
       >

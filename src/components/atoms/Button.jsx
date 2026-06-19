@@ -16,7 +16,7 @@ function Button({ to, children, className = "", ...props }) {
 
   return (
     <button
-      className={`relative flex justify-center items-center gap-1 min-w-min w-35 px-5 py-2 text-ink/90 font-semibold shadow-xl rounded-full mt-10 text-lg sm:text-xl active:scale-95 ${className}`}
+      className={`relative flex justify-center items-center gap-1 min-w-max w-35 px-5 py-2 text-ink/90 font-semibold shadow-xl rounded-full mt-10 text-lg sm:text-xl active:scale-95 ${className}`}
       {...props}
     >
       {children}

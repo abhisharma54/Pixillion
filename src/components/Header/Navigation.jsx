@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Container, Logo, SocialLink } from "../../index";
 import "../../css/menu.css";
@@ -24,6 +24,13 @@ function Navigation() {
     setMenu((prev) => !prev);
   };
 
+  useEffect(() => {
+    document.body.style.overflow = menu ? "hidden" : "auto";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [menu]);
+
   return (
     <header>
       <nav className="w-full bg-background flex justify-center relative">
@@ -32,7 +39,7 @@ function Navigation() {
 
           {/* Hamburger */}
           <button
-            className="relative w-6.5 h-5.5 block z-100 sm:hidden cursor-pointer"
+            className="relative w-6.5 h-5.5 block z-[100] sm:hidden cursor-pointer"
             onClick={handleMenu}
           >
             <span
@@ -48,19 +55,19 @@ function Navigation() {
 
           {/* Mobile Navigation*/}
           <div
-            className={`fixed inset-0 bg-background shadow-xl flex flex-col justify-between py-20 items-center gap-10 transition-transform duration-300 z-50 sm:hidden ${
+            className={`fixed inset-0 bg-background  flex flex-col justify-between py-20 z-40 items-center gap-10 transition-transform duration-300 ease-standard sm:hidden ${
               menu ? "translate-x-0" : "-translate-x-full"
             } overflow-hidden`}
           >
-            <ul className="flex flex-col gap-10">
+            <ul className="flex flex-col gap-20">
               {navLinks.map((link, i) => (
                 <li key={i}>
                   <NavLink
                     onClick={handleMenu}
                     className={({ isActive }) =>
-                      `flex items-center gap-2 text-xl font-semibold ${
+                      `inline-block text-xl font-semibold ${
                         isActive ? "text-ink/90" : "text-ink/70"
-                      } transition duration-150 ease-in-out hover:text-ink/90`
+                      } transition duration-150 ease-in-out hover:text-ink/90 active:scale-95`
                     }
                     to={link.path}
                   >
@@ -79,7 +86,7 @@ function Navigation() {
                 <NavLink
                   className={({ isActive }) =>
                     `inline-block text-xl font-semibold ${
-                      isActive ? "text-ink" : "text-ink/70"
+                      isActive ? "text-ink/90" : "text-ink/70"
                     } transition-transform duration-150 ease-standard hover:text-ink/90 active:scale-95`
                   }
                   to={link.path}

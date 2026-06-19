@@ -10,7 +10,7 @@ export const usePhotoHandler = (photos) => {
 
     if (photoExist !== -1) {
       let photos = favPhotos.map((prev) =>
-        prev.id === itemId ? { ...prev, liked: false } : prev
+        prev.id === itemId ? { ...prev, liked: false } : prev,
       );
       let updateFavPhoto = photos.filter((prev) => prev.id !== itemId);
       dispatch(setPhotos(updateFavPhoto));
@@ -46,8 +46,7 @@ export const usePhotoHandler = (photos) => {
     }
   };
 
-  const handlePreview = (itemId) => {
-    const photo = photos.flat().find((prev) => prev.id === itemId);
+  const handlePreview = (photo) => {
     dispatch(setPreviewImg(photo));
   };
 

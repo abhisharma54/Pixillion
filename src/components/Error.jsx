@@ -5,6 +5,10 @@ import Button from "./atoms/Button";
 import React from "react";
 
 function Error({ error }) {
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="w-full h-full max-h-[60vh] flex justify-center items-center py-10">
       {error === "No internet connection" ? (
@@ -13,7 +17,7 @@ function Error({ error }) {
           <span className="font-semibold sm:text-lg">
             {error || "No Internet"}
           </span>
-          <Button to="/">
+          <Button to="#" onClick={handleRefresh}>
             <span className="text-nowrap">Refresh Page</span>
             <IoMdRefresh className="text-2xl" />
           </Button>
@@ -26,7 +30,7 @@ function Error({ error }) {
               {error || "Service temporarily unavailable"}
             </span>
           </div>
-          <Button to="/">
+          <Button to="#" onClick={handleRefresh}>
             <span className="text-nowrap">Refresh Page</span>
             <IoMdRefresh className="text-2xl" />
           </Button>
